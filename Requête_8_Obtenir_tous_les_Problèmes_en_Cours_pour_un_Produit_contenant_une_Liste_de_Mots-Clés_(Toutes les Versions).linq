@@ -16,7 +16,7 @@
 </Query>
 
 int produitId = 1; // Exemple de produitId
-string[] motsClés = { "plantage", "erreur" }; // Exemple de mots-clés
+string[] motsClés = { "données", "problème" }; // Exemple de mots-clés
 var problèmesEnCours = Problèmes
                        .Join(Versions,
                              p => p.ID_Problème,

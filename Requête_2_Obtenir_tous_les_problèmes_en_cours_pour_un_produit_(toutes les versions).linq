@@ -17,11 +17,15 @@
 
 int produitId = 1; // Exemple de produitId
 var problèmesEnCours = Problèmes
-                       .Join(Versions,
+                       .Join(Problème_Version_OS,
                              p => p.ID_Problème,
+                             pvo => pvo.ID_Problème,
+                             (p, pvo) => new { p, pvo })
+                       .Join(Versions,
+                             pv => pv.pvo.ID_Version,
                              v => v.ID_Version,
-                             (p, v) => new { p, v })
-                       .Where(pv => pv.p.Statut == "En cours" && pv.v.ID_Produit == produitId)
-                       .Select(pv => pv.p)
+                             (pv, v) => new { pv.p, pv.pvo, v })
+                       .Where(pvv => pvv.p.Statut == "En cours" && pvv.v.ID_Produit == produitId)
+                       .Select(pvv => pvv.p)
                        .ToList();
 problèmesEnCours.Dump();

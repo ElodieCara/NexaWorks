@@ -15,18 +15,20 @@
   </Connection>
 </Query>
 
-int produitId = 1; // Exemple de produitId
-int versionId = 1; // Exemple de versionId
-var problèmesEnCours = Problèmes
-                       .Join(Problème_Version_OS,
-                             p => p.ID_Problème,
-                             pvo => pvo.ID_Problème,
-                             (p, pvo) => new { p, pvo })
-                       .Join(Versions,
-                             ppvo => ppvo.pvo.ID_Version,
-                             v => v.ID_Version,
-                             (ppvo, v) => new { ppvo, v })
-                       .Where(pv => pv.ppvo.p.Statut == "En cours" && pv.v.ID_Produit == produitId && pv.v.ID_Version == versionId)
-                       .Select(pv => pv.ppvo.p)
-                       .ToList();
-problèmesEnCours.Dump();
+    int produitId = 1; // Exemple de produitId
+    int versionId = 4; // Exemple de versionId
+
+    var problèmesFiltrés = Problèmes
+                           .Join(Problème_Version_OS,
+                                 p => p.ID_Problème,
+                                 pvo => pvo.ID_Problème,
+                                 (p, pvo) => new { p, pvo })
+                           .Join(Versions,
+                                 pv => pv.pvo.ID_Version,
+                                 v => v.ID_Version,
+                                 (pv, v) => new { pv.p, pv.pvo, v })
+                           .Where(pvv => pvv.p.Statut == "En cours" && pvv.v.ID_Produit == produitId && pvv.v.ID_Version == versionId)
+                           .Select(pvv => pvv.p)
+                           .ToList();
+    problèmesFiltrés.Dump("Problèmes Filtrés pour le produitId et versionId spécifiés");
+

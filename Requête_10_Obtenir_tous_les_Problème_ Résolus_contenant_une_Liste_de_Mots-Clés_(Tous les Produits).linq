@@ -15,7 +15,7 @@
   </Connection>
 </Query>
 
-string[] motsClés = { "plantage", "erreur" }; // Exemple de mots-clés
+string[] motsClés = { "latence", "données" }; // Exemple de mots-clés
 var problèmesRésolus = Problèmes
                        .Where(p => p.Statut == "Résolu" && motsClés.Any(mot => p.Description.Contains(mot)))
                        .ToList();
