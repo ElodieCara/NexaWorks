@@ -18,23 +18,26 @@
 void Main()
 {
     string produitId = Util.ReadLine("Saisissez le Code Produit :");
+	string versionId = Util.ReadLine("Saisissez le Code Version :");
     DateOnly dateDébut = DateOnly.Parse(Util.ReadLine("Saisissez la Date de Début (aaaa-mm-jj) :"));
     DateOnly dateFin = DateOnly.Parse(Util.ReadLine("Saisissez la Date de Fin (aaaa-mm-jj) :"));
 
-    var problèmesPériodePourProduit = from p in Problèmes
+    var problèmesPériodePourProduitVersion = from p in Problèmes
                  join pvo in Problème_Version_OS on p.ID_Problème equals pvo.ID_Problème
                  join pv in Produit_Versions on pvo.ID_Produit_Version equals pv.ID_Produit_Version
                  join pr in Produits on pv.ID_Produit equals pr.ID_Produit
+				 join v in Versions on pv.ID_Version equals v.ID_Version
                  where pr.ID_Produit.ToString() == produitId && p.Date_Création >= dateDébut && p.Date_Création <= dateFin
                  select new 
                  {
                      p.ID_Problème,
                      p.Description,
                      pr.Nom,
+					 v.Numéro_Version,
                      p.Statut,
                      p.Date_Création,
                      p.Date_Résolution
                  };
 
-     problèmesPériodePourProduit.ToList().Dump();
+    problèmesPériodePourProduitVersion.ToList().Dump();
 }

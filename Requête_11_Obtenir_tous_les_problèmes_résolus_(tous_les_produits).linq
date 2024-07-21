@@ -1,12 +1,12 @@
-<Query Kind="Statements">
+<Query Kind="Program">
   <Connection>
-    <ID>ecb6ec08-d8cb-4021-8fcb-e556fe62b88b</ID>
+    <ID>54ab4c95-bb37-45d2-8ba2-24461b3ed2ca</ID>
     <NamingServiceVersion>2</NamingServiceVersion>
     <Persist>true</Persist>
     <Driver Assembly="(internal)" PublicKeyToken="no-strong-name">LINQPad.Drivers.EFCore.DynamicDriver</Driver>
     <AllowDateOnlyTimeOnly>true</AllowDateOnlyTimeOnly>
     <Server>CARA</Server>
-    <Database>NexaWorksDB</Database>
+    <Database>NexaWorks</Database>
     <DriverData>
       <EncryptSqlTraffic>True</EncryptSqlTraffic>
       <PreserveNumeric1>True</PreserveNumeric1>
@@ -15,7 +15,10 @@
   </Connection>
 </Query>
 
-var problèmesRésolus = Problèmes
-                       .Where(p => p.Statut == "Résolu")
-                       .ToList();
-problèmesRésolus.Dump();
+void Main()
+{
+    var problèmesRésolus = Problèmes
+                           .Where(p => p.Statut == "Résolu")
+                           .ToList();
+    problèmesRésolus.Dump();
+}
