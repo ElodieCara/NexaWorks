@@ -37,5 +37,5 @@ void Main()
                                                  p.Date_Résolution
                                              };
 
-    problèmesEnCoursPourProduitVersion.ToList().Dump();
+    problèmesEnCoursPourProduitVersion.ToList().Dump("Problèmes En Cours pour Produit et Version");
 }
